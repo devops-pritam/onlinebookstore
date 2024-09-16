@@ -11,7 +11,7 @@ pipeline {
 
     stage('Maven') {
       steps {
-        sh 'sh \'mvn clean install package\''
+        sh 'mvn clean install package'
       }
     }
 
@@ -23,7 +23,7 @@ pipeline {
 
     stage('Dockerise') {
       steps {
-        sh 'sh \'docker build -t .\''
+        sh 'docker build -t .'
       }
     }
 
