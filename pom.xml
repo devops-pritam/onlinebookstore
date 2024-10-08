@@ -6,6 +6,18 @@
 	<artifactId>onlinebookstore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<properties>
+        	<java.version>17</java.version>
+	        <maven.compiler.source>${java.version}</maven.compiler.source>
+	        <maven.compiler.target>${java.version}</maven.compiler.target>
+	        <maven.compiler.release>${java.version}</maven.compiler.release>
+	        <maven.version>3.9.9</maven.version>
+	        <jacoco.version>0.8.12</jacoco.version>
+	        <sonar.language>java</sonar.language>
+	        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+	        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+	        <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
+    	</properties>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<finalName>onlinebookstore</finalName>
@@ -48,24 +60,43 @@
 					<warSourceDirectory>WebContent</warSourceDirectory>
 				</configuration>
 			</plugin>
+			<plugin>
+		                <groupId>org.jacoco</groupId>
+		                <artifactId>jacoco-maven-plugin</artifactId>
+		                <version>${jacoco.version}</version>
+		                <executions>
+		                    <execution>
+		                        <goals>
+		                            <goal>prepare-agent</goal>
+		                        </goals>
+		                    </execution>
+		                    <execution>
+		                        <id>report</id>
+		                        <phase>prepare-package</phase>
+		                        <goals>
+		                            <goal>report</goal>
+		                        </goals>
+		                    </execution>
+		                </executions>
+	            	</plugin>
 		</plugins>
 	</build>
 	<dependencies>
-
+		<dependency>
+	            <groupId>org.jacoco</groupId>
+	            <artifactId>jacoco-maven-plugin</artifactId>
+	            <version>0.8.12</version>
+        	</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.3.7</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.28</version>
+			<version>8.4.0</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
